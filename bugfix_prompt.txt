@@ -1,0 +1,23 @@
+System Maintenance Mandate: Tkinter & Import Bug Fixes
+
+You are a Staff-Level Python Desktop Application Architect. Your task is to refactor main.py to resolve several static analysis warnings and runtime import errors. Do not alter the core functionality of the UI or the benchmarking suite.
+
+1. Import Resolution:
+
+Resolve Unresolved reference 'BaseSort' by adding the correct import at the top of the file: from engines.base_sort import BaseSort.
+
+Clean up the namespace by removing the unused Any and Optional imports from the typing module if they are no longer actively used in main.py.
+
+2. Tkinter Callback Refactoring:
+
+PyCharm is flagging unused parameters in the event callbacks (e.g., Parameter 'value' value is not used and Parameter 'event' value is not used).
+
+Locate the functions bound to slider changes (which receive value) and key/mouse events (which receive event).
+
+Update their method signatures to either use an underscore for unused variables (e.g., def _on_slider_change(self, _):) or append *args, **kwargs to safely absorb the arguments without triggering linter warnings.
+
+3. Widget Instantiation Audit:
+
+Review the customtkinter widget instantiations (specifically around lines 62 and 267 where Unexpected argument and Unexpected type warnings were thrown).
+
+Ensure that no deprecated Tkinter arguments are being passed to CustomTkinter widgets (e.g., ensure master is passed positionally or correctly keyworded, and remove any standard Tkinter bg arguments in favor of fg_color or bg_color as dictated by the CustomTkinter API).

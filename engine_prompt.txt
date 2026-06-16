@@ -1,0 +1,39 @@
+System Architecture Mandate: Hybrid Sorting Engine (Generators)
+
+You are a Staff-Level Python Algorithm Engineer. Your task is to implement the pure-logic backend for a Sorting Visualizer inside the engines/ directory. You must use Python generator functions (yield) so the downstream UI can animate the sorting process frame-by-frame without blocking the main thread.
+
+1. The Base Interface (engines/base_sort.py):
+
+Create an abstract base class BaseSort.
+
+It should require a sort(array) method.
+
+Document that sort() must be a generator yielding a dictionary representing the current frame state. Format: {"array": list, "comparing": tuple(int, int), "swapping": tuple(int, int)}.
+
+2. Traditional Algorithms (engines/traditional.py):
+
+Implement MergeSort, QuickSort, HeapSort, and InsertionSort inheriting from BaseSort.
+
+CRITICAL CONSTRAINT: Every time array elements are compared, overwritten, or swapped, you MUST yield the current state.
+
+For recursive algorithms (Merge, Quick), you must use yield from to properly bubble the generator state up the call stack.
+
+3. The Hybrid Algorithm (engines/hybrid.py):
+
+Implement a HybridSort (Timsort-inspired) class inheriting from BaseSort.
+
+Logic: Divide the array into small blocks (e.g., RUN = 32). Use your InsertionSort logic to sort the individual blocks, then use the MergeSort logic to merge them together.
+
+Ensure every step (both the insertion phase and the merging phase) properly yields the frame state dictionary.
+
+4. Data Generator (utils/generator.py):
+
+Create helper functions to return datasets of a specific size:
+
+generate_random_array(size)
+
+generate_sorted_array(size)
+
+generate_reversed_array(size)
+
+Write clean, strictly typed, and heavily commented code. Do not implement any GUI or visualization logic in these files.

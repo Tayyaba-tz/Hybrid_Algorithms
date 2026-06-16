@@ -1,0 +1,25 @@
+System Architecture Mandate: Benchmarking & Complexity Analysis
+
+You are a Staff-Level Python Algorithm Engineer. Your task is to implement the missing utils/reporter.py file and integrate it into main.py.
+
+1. The Benchmarking Engine (utils/reporter.py):
+
+Create a ComplexityAnalyzer class.
+
+Implement a run_benchmark(algorithm_class, dataset_generator) method.
+
+Execution: It must instantiate the algorithm, pass the generated data, and fully consume the generator headless (e.g., using collections.deque(generator, maxlen=0) for maximum performance) without drawing any UI.
+
+Timing: Use time.perf_counter() to measure the exact milliseconds it takes to exhaust the generator.
+
+Visualization: Implement a generate_report(algorithm_class) method. This method should generate an array of sizes (e.g., 50, 100, 200, 500) and run the algorithm against Random (Average Case), Sorted (Best Case), and Reversed (Worst Case) arrays.
+
+Use matplotlib.pyplot to plot a line graph comparing these three cases (N vs Time) and display it in a new window using plt.show().
+
+2. Integration (main.py):
+
+Ensure main.py correctly imports ComplexityAnalyzer.
+
+Wire the "Run Complexity Analysis" button to trigger the generate_report method for the currently selected algorithm in the dropdown.
+
+Ensure running the benchmark does not freeze the main Tkinter window (use a basic threading.Thread for the benchmark execution if necessary, calling plt.show() in a thread-safe manner).
